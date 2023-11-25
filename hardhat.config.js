@@ -1,6 +1,8 @@
 require("@nomicfoundation/hardhat-toolbox")
 // included in the above - require("@nomiclabs/hardhat-etherscan")
 require("dotenv").config()
+require('./tasks/block-number')
+
 const {
   SEPOLIA_CHAIN_ID, 
 } = require('./constants')
