@@ -4,7 +4,8 @@ require("dotenv").config()
 require('./tasks/block-number')
 
 const {
-  SEPOLIA_CHAIN_ID, 
+  SEPOLIA_CHAIN_ID,
+  HARDHAT_CHAIN_ID,
 } = require('./constants')
 const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL
 const SEPOLIA_KEY = process.env.SEPOLIA_KEY
@@ -18,6 +19,11 @@ module.exports = {
       url: SEPOLIA_RPC_URL,
       accounts: [SEPOLIA_KEY],
       chainId: SEPOLIA_CHAIN_ID,
+    },
+    localhost: {
+      url: 'http://127.0.0.1:8545/',
+      // accounts: thanks hardhat,
+      chainId: HARDHAT_CHAIN_ID,
     },
   },
   solidity: "0.8.19",
