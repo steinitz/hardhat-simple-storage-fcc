@@ -24,9 +24,10 @@ async function main() {
     network.config.chainId === SEPOLIA_CHAIN_ID &&
     ETHERSCAN_API_KEY
   ) {
-    console.log('Waiting for block confirmations...')
-    await simpleStorage.deploymentTransaction().wait(5)
-    const address = simpleStorage.target
+    const numberOfBlockConfirmationsToWait = 7
+    console.log(`Waiting for ${numberOfBlockConfirmationsToWait} block confirmations...`)
+    await simpleStorage.deploymentTransaction().wait(numberOfBlockConfirmationsToWait)
+    const address = simpleStorage?.target
     console.log('Block confirmations complete. Verifying contract at address ', address)
     await verify(address, [])
   }
@@ -49,11 +50,17 @@ async function verify(contractAddress, args) {
       constructorArguments: args,
     })
   } catch (e) {
-    // if (e.message?.toLowerCase().includes("already verified")) {
-    //     console.log("Already verified")
-    //   } else {
+    console.log('catching test, temp:', e)
+    const lowerCaseMessage = e.message?.toLowerCase()
+    if (
+      lowerCaseMessage.includes("already") &&
+      lowerCaseMessage.includes("verified") 
+    ) {
+      console.log("Already verified")
+    } 
+    else {
       console.log(e)
-    // }
+    }
   }
 }
 

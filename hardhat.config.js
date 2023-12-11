@@ -3,6 +3,7 @@ require("@nomicfoundation/hardhat-toolbox")
 require("dotenv").config()
 require('./tasks/block-number')
 require('hardhat-gas-reporter')
+require('solidity-coverage')
 
 const {
   SEPOLIA_CHAIN_ID,
@@ -37,6 +38,7 @@ module.exports = {
     outputFile: 'gas-report.txt',
     noColors: true,
     currency: 'AUD',
+    token: 'ETH', // 'MATIC',
     coinmarketcap: COINMARKETCAP_API_KEY,
   }
  
